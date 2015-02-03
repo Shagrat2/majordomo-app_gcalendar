@@ -1,0 +1,28 @@
+<form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
+<table class="table table-striped">
+<thead>
+  <tr><th width="1%">&nbsp;</th><th>Name</th></tr>
+</thead>
+<tbody>
+[#begin CATEGORIES#]
+<tr class="hover_btn2">
+ <td>
+ <input type="checkbox" name="calendars_selected[]" value="[#ID#]" checked="checked">
+ <td nowrap>[#TITLE#]</td>  
+</tr>
+[#end CATEGORIES#]
+</tbody>
+</table>
+
+
+<div class="form-group">
+     <div class="col-lg-offset-1 col-lg-5">
+       <input class="btn btn-default btn-primary" type="submit" name="subm" value="<#LANG_DELETE#>" onClick="return confirm('Delete record?')">
+       &nbsp;
+       <a href="?" class="btn btn-default"><#LANG_CANCEL#></a>
+    </div>
+</div>
+
+<input type="hidden" name="view_mode" value="delete">
+<input type="hidden" name="edit_mode" value="<#EDIT_MODE#>">
+</form>

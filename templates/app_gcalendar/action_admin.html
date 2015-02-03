@@ -1,0 +1,55 @@
+<!--#
+ @version 0.1 (auto-set)
+#-->
+<!-- table zwave_devices search -->
+<div class="float-right">
+	<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#about">About&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign icon-white"></span>
+	</button>
+</div>
+
+<div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="about1" aria-hidden="true">
+<!-- <div id="about" class="modal hide"> -->
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">Google calendar import. [#VER#]</h4>
+			</div>
+			<div class="modal-body">
+				<p>Import Google calendars.<br>
+				<a href="" target="_blank">Forum</a>.<br>				
+				</p>
+				<p class="float-left"></p>
+			</div>
+			
+			<div class="modal-footer">
+				<div class="pull-left">Best regards!<br>@S :)</div>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div>
+Google calendar import
+</div>
+
+<br>
+ [#if VIEW_MODE=""#]  
+   [#inc main.html#]  
+ [#endif VIEW_MODE#]
+ 
+ [#if VIEW_MODE="nide_token"#]
+  [#inc nide_token.html#]  
+ [#endif VIEW_MODE#] 
+ 
+ [#if VIEW_MODE="import"#]
+  [#inc import.html#]  
+ [#endif VIEW_MODE#] 
+ 
+ [#if VIEW_MODE="import_data"#]
+  [#inc import_data.html#]  
+ [#endif VIEW_MODE#]  
+ 
+ [#if VIEW_MODE="seldelete"#]
+  [#inc seldelete.html#]  
+ [#endif VIEW_MODE#]   
