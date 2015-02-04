@@ -9,7 +9,8 @@ $dictionary=array(
 /* general */
 'GC_IMPORT_TITLE'=>'Import calendars from Google',
 'GC_DELETE_TITLE'=>'Delete Calendar from base',
-'GC_GOTO_GOOGLE_URL'=>'Goto URL and get access code'
+'GC_GOTO_GOOGLE_URL'=>'Goto URL and get access code',
+'GC_HELP'=>'To add a ready-made calendars, you need to go to Google Calendar \ Options \ Calendars'
 
 /* end module names */
 
