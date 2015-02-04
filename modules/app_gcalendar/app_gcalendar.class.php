@@ -136,17 +136,14 @@ function admin(&$out) {
 		$this->client->addScope("https://www.googleapis.com/auth/calendar.readonly");
 		
 		global $code; // $_GET['code']
-		if (isset($code)) {
-			//echo "Code: $code<br/>";		
+		if (isset($code)) {			
 			$this->client->authenticate($code);
 			$_SESSION['access_token'] = $this->client->getAccessToken();		
 		}
 
-		if (isset($_SESSION['access_token']) && $_SESSION['access_token']) { 
-		    //echo "Get token<br/>";
+		if (isset($_SESSION['access_token']) && $_SESSION['access_token']) { 		    
 			$this->client->setAccessToken($_SESSION['access_token']);
-		} else {
-		    //echo "Auto url<br/>";
+		} else {		    
 			$out['AUTOURL'] = $this->client->createAuthUrl();
 		}
 		
@@ -184,11 +181,7 @@ function usual(&$out) {
 function selectDelete(&$out) {
   $CATEGORIES=SQLSelect("SELECT ID, TITLE FROM calendar_categories;"); 
   
-  //$CATEGORIES[] = array('ID'=>1, 'TITLE'=>'E1');
-  //$CATEGORIES[] = array('ID'=>2, 'TITLE'=>'E2');
-  
   $out['CATEGORIES'] = $CATEGORIES;
-  //print_r( $CATEGORIES );
 }
 
 /**
@@ -274,9 +267,6 @@ function import_data(&$out) {
 		  
 		  while(true) {
 			foreach ($events->getItems() as $event) {
-			  
-			  //$RESULT_LOG[] = print_r($event, true);
-
 			  $node = NULL;
 			  
 			  // Title			  
@@ -319,12 +309,21 @@ function import_data(&$out) {
 		      $recurrence = $event->getRecurrence();
 			  if ($recurrence) {
 			    foreach ($recurrence as $itm) {
-				  if (strpos($itm, 'RRULE:FREQ=YEARLY') === false){
-					$RESULT_LOG[] = "Unknow recurrence: ".$itm;
-				  } else {
-				    $node['IS_REPEATING'] = 1;
+				  // YEARLY
+				  if (strpos($itm, 'RRULE:FREQ=YEARLY') != false){
+					$node['IS_REPEATING'] = 1;
 				    $node['REPEAT_TYPE'] = 1;
-				    $node['REPEAT_IN'] = 3;				  
+				    $node['REPEAT_IN'] = 3;					
+				  } else 
+				  // WEEKLY
+				  if (strpos($itm, 'RRULE:FREQ=WEEKLY') != false){
+					$node['IS_REPEATING'] = 1;
+				    $node['REPEAT_TYPE'] = 3;
+				    $node['REPEAT_IN'] = 3;					  
+				  } else 
+				  // Unknow 
+				  {
+					$RESULT_LOG[] = "Unknow recurrence: ".$itm;				    
 				  }  
 			    }
 			  }			 
