@@ -127,7 +127,7 @@ function admin(&$out) {
 	} else if ($this->view_mode != ""){
 		require_once './lib/Google/autoload.php';
 		
-		session_start();
+		session_start();		
 		
 		$this->client = new Google_Client();
 		$this->client->setClientId('328872985588-7rmn68kb878j4pomshnltglcm86usgfu.apps.googleusercontent.com');
@@ -160,6 +160,8 @@ function admin(&$out) {
 		  // Nide token	  
 		  $this->view_mode = 'nide_token';
 		}		
+	} else {
+		unset($_SESSION['access_token']);
 	}
 }
 /**
@@ -310,19 +312,19 @@ function import_data(&$out) {
 			  if ($recurrence) {
 			    foreach ($recurrence as $itm) {
 				  // YEARLY
-				  if (strpos($itm, 'RRULE:FREQ=YEARLY') != false){
+				  if (strpos($itm, 'RRULE:FREQ=YEARLY') !== false){
 					$node['IS_REPEATING'] = 1;
 				    $node['REPEAT_TYPE'] = 1;
-				    $node['REPEAT_IN'] = 3;					
-				  } else 
+				    $node['REPEAT_IN'] = 3;						
+				  } 
 				  // WEEKLY
-				  if (strpos($itm, 'RRULE:FREQ=WEEKLY') != false){
+				  else if (strpos($itm, 'RRULE:FREQ=WEEKLY') !== false){
 					$node['IS_REPEATING'] = 1;
 				    $node['REPEAT_TYPE'] = 3;
 				    $node['REPEAT_IN'] = 3;					  
-				  } else 
-				  // Unknow 
-				  {
+				  } 
+				  // Unknow
+				  else {
 					$RESULT_LOG[] = "Unknow recurrence: ".$itm;				    
 				  }  
 			    }
