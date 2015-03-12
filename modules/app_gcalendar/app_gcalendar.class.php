@@ -317,6 +317,12 @@ function import_data(&$out) {
 				    $node['REPEAT_TYPE'] = 1;
 				    $node['REPEAT_IN'] = 3;						
 				  } 
+				  // MONTHLY
+				  else if (strpos($itm, 'RRULE:FREQ=MONTHLY') !== false){
+					$node['IS_REPEATING'] = 1;
+				    $node['REPEAT_TYPE'] = 2;
+				    $node['REPEAT_IN'] = 3;  
+				  }
 				  // WEEKLY
 				  else if (strpos($itm, 'RRULE:FREQ=WEEKLY') !== false){
 					$node['IS_REPEATING'] = 1;
