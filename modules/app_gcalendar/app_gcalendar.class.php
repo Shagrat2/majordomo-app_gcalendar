@@ -1,4 +1,4 @@
-<?
+<?php
 /**
 * GCalendar Import
 *
