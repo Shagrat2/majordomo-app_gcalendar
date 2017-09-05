@@ -281,15 +281,20 @@ function import_data(&$out) {
 			  }
 			  
 			  // Added
-			  $node['ADDED'] = $event->getCreated();
+			  $added = $event->getCreated();
+			  if ($added) {				
+				$node['ADDED'] = date('Y-m-d H:i:s', strtotime( $added ));
+			  }
 			  
 			  // Due
 			  $start = $event->getStart();			  
 			  if ($start) {
+				//DebMes("Due: ".print_r($start, true));
+				
 				if ($start['dateTime']){
-			      $node['DUE']  = $start['dateTime'];				
+			      $node['DUE'] = date('Y-m-d H:i:s', strtotime( $start['dateTime'] ));
 				} else if ($start['date']){
-				  $node['DUE']  = $start['date'];				
+				  $node['DUE'] = date('Y-m-d H:i:s', strtotime( $start['date'] ));
 			    } else {
 				  $RESULT_LOG[] = "Invalid start date :".print_r($start, true);
 			    }
@@ -298,10 +303,12 @@ function import_data(&$out) {
 			  // End
 			  $end = $event->getEnd();
 			  if ($end) {
+				//DebMes("End: ".print_r($start, true));
+				  
 				if ($end['dateTime']){
-			      $node['DONE_WHEN']  = $end['dateTime'];
+			      $node['DONE_WHEN'] = date('Y-m-d H:i:s', strtotime( $end['dateTime'] ));
 				} else if ($end['date']){
-			      $node['DONE_WHEN']  = $end['date'];
+			      $node['DONE_WHEN'] = date('Y-m-d H:i:s', strtotime( $end['date'] ));
 				} else {
 				  $RESULT_LOG[] = "Invalid end date :".print_r($start, true);
 				}
